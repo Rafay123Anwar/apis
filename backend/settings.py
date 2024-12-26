@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,21 +26,13 @@ SECRET_KEY = 'django-insecure-uq663b6hb_rqqqpst%nb6t-0mt54w$rmp@w8ck0dc4mj-4(v_s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.jeiufgvjlalirilehuek',
-        'PASSWORD': 'Kngo82CwY56t2dPe',
-        'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com',
-        'PORT': '6543',  
-    }
-} 
 
 
 # ALLOWED_HOSTS = []
 
 ALLOWED_HOSTS = ['.vercel.app','localhost','127.0.0.1','.now.sh']
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,7 +50,7 @@ INSTALLED_APPS = [
 
 
 MIDDLEWARE = [
-     'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -98,12 +91,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.jeiufgvjlalirilehuek',
+        'PASSWORD': 'Kngo82CwY56t2dPe',
+        'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com',
+        'PORT': '6543',  
+    }
+} 
+
 
 
 # Password validation
@@ -142,6 +140,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS =[os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles_build','static')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -158,7 +159,9 @@ REST_FRAMEWORK = {
 }
 
 
-import os
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
